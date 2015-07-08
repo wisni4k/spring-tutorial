@@ -18,12 +18,9 @@ public class BasicDeliveryTimeServiceImpl implements DeliveryTimeService {
 	@Setter
 	private DeliveryTimeStrategy strategy;
 
-	public BasicDeliveryTimeServiceImpl() {
-	}
-
-	public BasicDeliveryTimeServiceImpl(TimeService timeService) {
+	public BasicDeliveryTimeServiceImpl(TimeService timeService, PizzaTypeDeliveryTimeStrategy pizzaTypeDeliveryTimeStrategy) {
 		this.timeService = timeService;
-		this.strategy = new PizzaTypeDeliveryTimeStrategy();
+		this.strategy = pizzaTypeDeliveryTimeStrategy;
 	}
 
 	@Override
