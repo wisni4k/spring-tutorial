@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import lombok.extern.slf4j.Slf4j;
 
 import com.acme.order.pizza.PizzaOrder;
 
 @Slf4j
+@Component
 public class HashMapOrderRepository implements OrderRepository {
 
 	private final Map<String, PizzaOrder> database = new HashMap<>();

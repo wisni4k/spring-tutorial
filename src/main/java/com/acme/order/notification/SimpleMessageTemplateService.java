@@ -1,14 +1,15 @@
 package com.acme.order.notification;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class SimpleMessageTemplateService implements MessageTemplateService {
+	@Autowired
+	private DeliveryTemplate deliveryTemplate;
+	@Autowired
+	private OrderCancelledTemplate cancelDeliveryTemplate;
 
-	private final DeliveryTemplate deliveryTemplate;
-	private final OrderCancelledTemplate cancelDeliveryTemplate;
-
-	public SimpleMessageTemplateService() {
-		this.deliveryTemplate = new DeliveryTemplate();
-		this.cancelDeliveryTemplate = new OrderCancelledTemplate();
-	}
 
 	@Override
 	public DeliveryTemplate getDeliveryTemplate() {

@@ -22,7 +22,6 @@
 	<bean id="deliveryTimeService" class="com.acme.order.delivery.BasicDeliveryTimeServiceImpl">
 	
 		<constructor-arg name="timeService" ref="timeService"/>
-			
         <constructor-arg name="pizzaTypeDeliveryTimeStrategy" ref="pizzaTypeDeliveryTimeStrategy"/>
         	
         <constructor-arg/>

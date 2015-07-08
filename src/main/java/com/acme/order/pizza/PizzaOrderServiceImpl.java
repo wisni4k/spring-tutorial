@@ -3,6 +3,10 @@ package com.acme.order.pizza;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import lombok.extern.slf4j.Slf4j;
 
 import com.acme.order.Customer;
@@ -20,34 +24,20 @@ import com.acme.order.notification.OrderCancelledTemplate;
 import com.acme.order.notification.SimpleMessageTemplateService;
 
 @Slf4j
+@Component
 public class PizzaOrderServiceImpl implements PizzaOrderService {
 
-	private final MailSender mailSender;
+	@Autowired
+	private MailSender mailSender;
+	@Autowired
+	private  OrderRepository orderRepository;
+	@Autowired
+	private  OrderFactory orderFactory;
+	@Autowired
+	private  DeliveryTimeService deliveryTimeService;
+	@Autowired
+	private  MessageTemplateService messageTemplate;
 
-	private final OrderRepository orderRepository;
-
-	private final OrderFactory orderFactory;
-
-	private final DeliveryTimeService deliveryTimeService;
-
-	private final MessageTemplateService messageTemplate;
-
-	public PizzaOrderServiceImpl() {
-		this.orderFactory = new OrderFactory();
-		this.orderRepository = new HashMapOrderRepository();
-		this.deliveryTimeService = new BasicDeliveryTimeServiceImpl(new TimeService());
-		this.messageTemplate = new SimpleMessageTemplateService();
-		this.mailSender = new MailSender();
-	}
-
-	public PizzaOrderServiceImpl(MailSender mailSender, OrderRepository orderRepository, OrderFactory orderFactory,
-			DeliveryTimeService deliveryTimeService, MessageTemplateService messageTemplate) {
-		this.orderFactory = orderFactory;
-		this.orderRepository = orderRepository;
-		this.deliveryTimeService = deliveryTimeService;
-		this.messageTemplate = messageTemplate;
-		this.mailSender = mailSender;
-	}
 
 	@Override
 	public String createOrder(Customer customer, PizzaType type) {
